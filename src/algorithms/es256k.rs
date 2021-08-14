@@ -45,6 +45,7 @@ impl K256PublicKey {
 }
 
 #[doc(hidden)]
+#[derive(Clone, Debug)]
 pub struct K256KeyPair(ecdsa::SigningKey);
 
 impl AsRef<ecdsa::SigningKey> for K256KeyPair {
@@ -158,6 +159,7 @@ pub trait ECDSAP256kPublicKeyLike {
     }
 }
 
+#[derive(Clone, Debug)]
 pub struct ES256kKeyPair {
     key_pair: K256KeyPair,
     key_id: Option<String>,

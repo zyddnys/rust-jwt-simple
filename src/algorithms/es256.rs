@@ -32,6 +32,7 @@ impl P256PublicKey {
 }
 
 #[doc(hidden)]
+#[derive(Debug, Clone)]
 pub struct P256KeyPair(ecdsa::SigningKey);
 
 impl AsRef<ecdsa::SigningKey> for P256KeyPair {
