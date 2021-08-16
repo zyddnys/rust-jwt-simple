@@ -327,6 +327,25 @@ impl Claims {
             custom: custom_claims,
         }
     }
+    /// Create a new set of claims, with custom data, expiring in `valid_for` and starts in invalid_before.
+    pub fn with_custom_claims_given_valid_period<CustomClaims: Serialize + DeserializeOwned>(
+        custom_claims: CustomClaims,
+        invalid_before: UnixTimeStamp,
+        valid_for: Duration,
+    ) -> JWTClaims<CustomClaims> {
+        let now = Some(Clock::now_since_epoch());
+        JWTClaims {
+            issued_at: now,
+            expires_at: Some(invalid_before + valid_for),
+            invalid_before: Some(invalid_before),
+            audiences: None,
+            issuer: None,
+            jwt_id: None,
+            subject: None,
+            nonce: None,
+            custom: custom_claims,
+        }
+    }
 }
 
 #[cfg(test)]
