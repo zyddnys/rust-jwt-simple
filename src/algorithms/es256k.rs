@@ -257,6 +257,13 @@ impl ES256kPublicKey {
         })
     }
 
+    pub fn from_pem(pem: &str) -> Result<Self, Error> {
+        Ok(ES256kPublicKey {
+            pk: K256PublicKey::from_pem(pem)?,
+            key_id: None,
+        })
+    }
+
     pub fn to_bytes(&self) -> Vec<u8> {
         self.pk.to_bytes()
     }
